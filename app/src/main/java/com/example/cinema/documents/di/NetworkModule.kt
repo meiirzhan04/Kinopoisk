@@ -1,7 +1,8 @@
-package com.example.cinema.documents.data.remote
+package com.example.cinema.documents.di
 
 import com.chuckerteam.chucker.api.ChuckerInterceptor
-import com.example.cinema.documents.MyApp
+import com.example.cinema.documents.di.MyApp
+import com.example.cinema.documents.data.remote.FilmApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -23,7 +24,7 @@ object NetworkModule {
             .addInterceptor(HttpLoggingInterceptor().apply {
                 level = HttpLoggingInterceptor.Level.BODY
             })
-            .addNetworkInterceptor(ChuckerInterceptor(MyApp.instance))
+            .addNetworkInterceptor(ChuckerInterceptor(MyApp.Companion.instance))
             .build()
     }
 

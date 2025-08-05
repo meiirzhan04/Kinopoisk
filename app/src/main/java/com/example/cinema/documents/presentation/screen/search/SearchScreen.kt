@@ -66,8 +66,8 @@ import coil.compose.AsyncImage
 import coil.compose.AsyncImagePainter
 import com.example.cinema.R
 import com.example.cinema.documents.presentation.navigation.Screen
-import com.example.cinema.documents.presentation.viewmodel.ImageCacheViewModel
-import com.example.cinema.documents.presentation.viewmodel.SearchViewModel
+import com.example.cinema.documents.presentation.screen.home.ImageCacheViewModel
+import com.example.cinema.documents.presentation.screen.search.SearchViewModel
 import com.google.accompanist.placeholder.PlaceholderHighlight
 import com.google.accompanist.placeholder.material3.placeholder
 import com.google.accompanist.placeholder.material3.shimmer

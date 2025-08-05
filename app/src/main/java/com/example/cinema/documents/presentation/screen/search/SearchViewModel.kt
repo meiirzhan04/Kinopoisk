@@ -1,8 +1,7 @@
-package com.example.cinema.documents.presentation.viewmodel
+package com.example.cinema.documents.presentation.screen.search
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.cinema.documents.domain.domain.FilmDetail
 import com.example.cinema.documents.domain.domain.SearchFilm
 import com.example.cinema.documents.domain.repository.FilmRepository
 import dagger.hilt.android.lifecycle.HiltViewModel

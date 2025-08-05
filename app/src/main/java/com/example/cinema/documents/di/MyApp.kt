@@ -1,4 +1,4 @@
-package com.example.cinema.documents
+package com.example.cinema.documents.di
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

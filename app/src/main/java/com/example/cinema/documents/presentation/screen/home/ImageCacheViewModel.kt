@@ -1,4 +1,4 @@
-package com.example.cinema.documents.presentation.viewmodel
+package com.example.cinema.documents.presentation.screen.home
 
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

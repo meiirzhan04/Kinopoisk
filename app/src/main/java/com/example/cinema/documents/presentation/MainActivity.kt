@@ -1,4 +1,4 @@
-package com.example.cinema
+package com.example.cinema.documents.presentation
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
