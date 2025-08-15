@@ -5,6 +5,7 @@ import com.example.cinema.documents.domain.domain.EpisodesResponse
 import com.example.cinema.documents.domain.domain.FilmDetail
 import com.example.cinema.documents.domain.domain.SearchResponse
 import com.example.cinema.documents.domain.domain.Staff
+import com.example.cinema.documents.domain.domain.TrailerResponse
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Path
@@ -35,4 +36,10 @@ interface FilmApi {
         @Query("page") page: Int = 1,
         @Header("X-API-KEY") apiKey: String
     ): SearchResponse
+
+    @GET("api/v2.2/films/{id}/videos")
+    suspend fun getTrailer(
+        @Path("id") filmId: Int,
+        @Header("X-API-KEY") apiKey: String
+    ): TrailerResponse
 }

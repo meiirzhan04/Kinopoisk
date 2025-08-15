@@ -45,6 +45,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import com.example.cinema.R
+import com.example.cinema.documents.domain.domain.Trailer
 import com.example.cinema.documents.presentation.viewmodel.FilmListViewModel
 import com.example.cinema.documents.presentation.viewmodel.StaffViewModel
 
@@ -56,6 +57,7 @@ fun MovieDetailScreen(
     onBackClick: () -> Unit,
 ) {
     val film by viewModel.film.collectAsState()
+    val trailer by viewModel.trailer.collectAsState()
     var isClicked by remember { mutableStateOf(false) }
 
     val seasonsState by viewModel.seasonsState.collectAsState()
@@ -68,6 +70,7 @@ fun MovieDetailScreen(
     }
     LaunchedEffect(filmId) {
         staffViewModel.loadActors(filmId, api)
+        viewModel.getTrailer(filmId)
     }
 
 
@@ -75,14 +78,9 @@ fun MovieDetailScreen(
         LazyColumn(modifier = Modifier.fillMaxSize()) {
             item {
                 Box {
-                    AsyncImage(
-                        model = movie.posterUrl,
-                        contentDescription = movie.nameRu,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(500.dp),
-                        contentScale = ContentScale.Crop
-                    )
+                    val embedUrl = "https://www.youtube.com/embed/5iw-hJ6xteE?si=T58BKBhotMqGKnnl"
+
+                    YoutubeWebViewPlayer(embedUrl = embedUrl)
                     Icon(
                         imageVector = Icons.AutoMirrored.Filled.KeyboardArrowLeft,
                         contentDescription = "Back",

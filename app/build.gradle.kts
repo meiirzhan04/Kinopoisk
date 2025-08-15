@@ -47,6 +47,16 @@ android {
 }
 
 dependencies {
+
+    implementation("androidx.media3:media3-exoplayer:1.3.1")
+    implementation("androidx.media3:media3-ui:1.3.1")
+    implementation("androidx.media3:media3-exoplayer-hls:1.3.1")
+    implementation("androidx.compose.material3:material3:1.2.1")
+    implementation("io.coil-kt:coil-compose:2.5.0")
+    implementation("com.pierfrancescosoffritti.androidyoutubeplayer:core:11.1.0")
+
+
+
     implementation ("com.google.dagger:hilt-android:2.51.1")
     implementation(libs.ui) // Replace VERSION
     kapt("com.google.dagger:hilt-compiler:2.51.1")

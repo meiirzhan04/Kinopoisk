@@ -1,9 +1,11 @@
 package com.example.cinema.documents.presentation.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.cinema.documents.data.remote.FilmApi
 import com.example.cinema.documents.domain.domain.FilmDetail
+import com.example.cinema.documents.domain.domain.Trailer
 import com.example.cinema.documents.presentation.screen.moviedetail.SeasonsUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.async
@@ -48,6 +50,9 @@ class FilmListViewModel @Inject constructor(
     private val _film = MutableStateFlow<FilmDetail?>(null)
     val film: StateFlow<FilmDetail?> = _film
 
+    private val _trailers = MutableStateFlow<Trailer?>(null)
+    val trailer: StateFlow<Trailer?> = _trailers
+
     fun loadFilm(id: Int, apiKey: String) {
         viewModelScope.launch {
             try {
@@ -74,6 +79,18 @@ class FilmListViewModel @Inject constructor(
                 _seasonsState.value = SeasonsUiState.Success(seasonsCount, episodesCount)
             } catch (e: Exception) {
                 _seasonsState.value = SeasonsUiState.Error(e.message ?: "Unknown error")
+            }
+        }
+    }
+
+    fun getTrailer(filmId: Int) {
+        viewModelScope.launch {
+            try {
+                val response = api.getTrailer(filmId = filmId, "f503c2e2-dcac-4045-9748-ddd23fc0bafe")
+                val trailerUrl = response.items.firstOrNull { it.site == "YOUTUBE" }?.url
+                Log.d("Trailer", "URL: $trailerUrl")
+            } catch (e: Exception) {
+                Log.e("API_ERROR", "Error loading trailer", e)
             }
         }
     }
