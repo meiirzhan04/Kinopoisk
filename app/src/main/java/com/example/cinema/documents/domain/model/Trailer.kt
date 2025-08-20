@@ -1,0 +1,12 @@
+package com.example.cinema.documents.domain.model
+
+data class TrailerResponse(
+    val total: Int,
+    val items: List<Trailer>
+)
+
+data class Trailer(
+    val url: String,
+    val name: String,
+    val site: String
+)

@@ -8,7 +8,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.cinema.documents.domain.domain.FilmDetail
+import com.example.cinema.documents.domain.model.FilmDetail
 import com.example.cinema.documents.presentation.components.movie.MovieCard
 import com.example.cinema.documents.presentation.components.movie.MovieCardShimmer
 

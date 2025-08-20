@@ -299,7 +299,6 @@ fun SearchScreen(
                             )
                         )
                     }
-
                 }
             }
         }

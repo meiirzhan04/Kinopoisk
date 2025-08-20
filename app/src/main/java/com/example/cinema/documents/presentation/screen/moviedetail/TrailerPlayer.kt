@@ -1,5 +1,6 @@
 package com.example.cinema.documents.presentation.screen.moviedetail
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -21,6 +22,7 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.Abs
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 import androidx.core.net.toUri
 
+@SuppressLint("SetJavaScriptEnabled")
 @Composable
 fun YoutubeWebViewPlayer(embedUrl: String) {
     AndroidView(

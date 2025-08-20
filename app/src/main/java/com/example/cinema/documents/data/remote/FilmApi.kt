@@ -1,11 +1,13 @@
 package com.example.cinema.documents.data.remote
 
-import com.example.cinema.documents.domain.domain.Episode
-import com.example.cinema.documents.domain.domain.EpisodesResponse
-import com.example.cinema.documents.domain.domain.FilmDetail
-import com.example.cinema.documents.domain.domain.SearchResponse
-import com.example.cinema.documents.domain.domain.Staff
-import com.example.cinema.documents.domain.domain.TrailerResponse
+import com.example.cinema.documents.domain.model.EpisodesResponse
+import com.example.cinema.documents.domain.model.FilmDetail
+import com.example.cinema.documents.domain.model.ImagesResponse
+import com.example.cinema.documents.domain.model.SearchResponse
+import com.example.cinema.documents.domain.model.SimilarFilm
+import com.example.cinema.documents.domain.model.Staff
+import com.example.cinema.documents.domain.model.TrailerResponse
+import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Path
@@ -42,4 +44,18 @@ interface FilmApi {
         @Path("id") filmId: Int,
         @Header("X-API-KEY") apiKey: String
     ): TrailerResponse
+
+    @GET("api/v2.2/films/{id}/images")
+    suspend fun getImages(
+        @Path("id") filmId: Int,
+        @Header("X-API-KEY") apiKey: String,
+        @Query("type") type: String? = null,
+        @Query("page") page: Int? = null
+    ): Response<ImagesResponse>
+
+    @GET("api/v2.2/films/{id}/similars")
+    suspend fun getSimilarFilms(
+        @Path("id") filmId: Int,
+        @Header("X-API-KEY") apiKey: String,
+    ): SimilarFilm
 }

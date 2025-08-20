@@ -2,6 +2,7 @@
 
 package com.example.cinema.documents.presentation.components.movie
 
+import android.R.attr.text
 import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -57,7 +58,6 @@ fun MovieCard(
         Box(
             modifier = Modifier
                 .height(156.dp)
-                .width(111.dp)
                 .clip(RoundedCornerShape(4.dp))
                 .clickable { onClick() }
         ) {
@@ -108,9 +108,10 @@ fun MovieCard(
             lineHeight = 16.sp,
             fontWeight = FontWeight.Medium,
             color = Color(0xFF272727),
-            maxLines = 2,
+            maxLines = 1,
             overflow = TextOverflow.Ellipsis,
-            modifier = Modifier.placeholder(
+            modifier = Modifier
+                .placeholder(
                 visible = isLoading,
                 highlight = PlaceholderHighlight.shimmer()
             )
@@ -124,7 +125,8 @@ fun MovieCard(
             color = Color(0xFF838390),
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
-            modifier = Modifier.placeholder(
+            modifier = Modifier
+                .placeholder(
                 visible = isLoading,
                 highlight = PlaceholderHighlight.shimmer()
             )

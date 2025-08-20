@@ -1,7 +1,7 @@
 package com.example.cinema.documents.domain.repository
 
 import com.example.cinema.documents.data.remote.FilmApi
-import com.example.cinema.documents.domain.domain.SearchFilm
+import com.example.cinema.documents.domain.model.SearchFilm
 import javax.inject.Inject
 
 class FilmRepository @Inject constructor(

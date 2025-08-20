@@ -4,8 +4,8 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.cinema.documents.data.remote.FilmApi
-import com.example.cinema.documents.domain.domain.FilmDetail
-import com.example.cinema.documents.domain.domain.Trailer
+import com.example.cinema.documents.domain.model.FilmDetail
+import com.example.cinema.documents.domain.model.Trailer
 import com.example.cinema.documents.presentation.screen.moviedetail.SeasonsUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.async
@@ -53,6 +53,8 @@ class FilmListViewModel @Inject constructor(
     private val _trailers = MutableStateFlow<Trailer?>(null)
     val trailer: StateFlow<Trailer?> = _trailers
 
+    private val _seasonsState = MutableStateFlow<SeasonsUiState>(SeasonsUiState.Loading)
+    val seasonsState: StateFlow<SeasonsUiState> = _seasonsState
     fun loadFilm(id: Int, apiKey: String) {
         viewModelScope.launch {
             try {
@@ -64,8 +66,6 @@ class FilmListViewModel @Inject constructor(
         }
     }
 
-    private val _seasonsState = MutableStateFlow<SeasonsUiState>(SeasonsUiState.Loading)
-    val seasonsState: StateFlow<SeasonsUiState> = _seasonsState
 
     fun loadSeasonsAndEpisodes(filmId: Int, apiKey: String) {
         viewModelScope.launch {
@@ -86,7 +86,7 @@ class FilmListViewModel @Inject constructor(
     fun getTrailer(filmId: Int) {
         viewModelScope.launch {
             try {
-                val response = api.getTrailer(filmId = filmId, "f503c2e2-dcac-4045-9748-ddd23fc0bafe")
+                val response = api.getTrailer(filmId = filmId, "fdbc3912-2979-460b-afeb-70590710993a")
                 val trailerUrl = response.items.firstOrNull { it.site == "YOUTUBE" }?.url
                 Log.d("Trailer", "URL: $trailerUrl")
             } catch (e: Exception) {

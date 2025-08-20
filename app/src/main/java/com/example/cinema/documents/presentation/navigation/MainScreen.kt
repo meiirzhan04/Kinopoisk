@@ -70,6 +70,7 @@ fun MainScreen() {
                     onBackClick = {
                         navController.popBackStack()
                     },
+                    navController = navController
                 )
             }
         }

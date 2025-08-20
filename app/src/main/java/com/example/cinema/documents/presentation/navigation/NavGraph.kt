@@ -33,6 +33,7 @@ fun NavGraph() {
                 onBackClick = {
                     navController.popBackStack()
                 },
+                navController = navController
             )
         }
     }
