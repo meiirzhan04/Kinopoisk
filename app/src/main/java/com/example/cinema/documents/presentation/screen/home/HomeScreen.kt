@@ -29,18 +29,30 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.cinema.R
+import com.example.cinema.documents.domain.OnboardingPreferences
 import com.example.cinema.documents.presentation.components.MovieListOrShimmer
 import com.example.cinema.documents.presentation.navigation.Screen
 import com.example.cinema.documents.presentation.viewmodel.FilmListUiState
 import com.example.cinema.documents.presentation.viewmodel.FilmListViewModel
+import kotlinx.coroutines.flow.first
 
 @Composable
 fun HomeScreen(
     viewModel: FilmListViewModel = hiltViewModel(),
-    navController: NavController
+    navController: NavController,
+    onboardingPreferences: OnboardingPreferences,
 ) {
     val uiState by viewModel.uiState.collectAsState()
-
+    LaunchedEffect(Unit) {
+        val isOnboardingCompleted = onboardingPreferences.isOnboardingCompleted.first()
+        when {
+            !isOnboardingCompleted -> {
+                navController.navigate(Screen.OnBoardingScreen.route) {
+                    popUpTo(Screen.Home.route) { inclusive = true }
+                }
+            }
+        }
+    }
     LaunchedEffect(Unit) {
         viewModel.loadFilms(
             listOf(
@@ -133,7 +145,6 @@ fun HomeScreen(
         }
     }
 }
-
 
 
 @Composable

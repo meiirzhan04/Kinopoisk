@@ -5,6 +5,8 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.material3.MaterialTheme
+import androidx.navigation.NavHostController
+import com.example.cinema.documents.domain.OnboardingPreferences
 import com.example.cinema.documents.presentation.navigation.MainScreen
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -14,10 +16,8 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            setContent {
-                MaterialTheme {
-                    MainScreen()
-                }
+            MaterialTheme {
+                MainScreen()
             }
         }
     }

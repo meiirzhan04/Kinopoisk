@@ -4,16 +4,22 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.example.cinema.documents.domain.OnboardingPreferences
 import com.example.cinema.documents.presentation.screen.account.AccountScreen
 import com.example.cinema.documents.presentation.screen.home.HomeScreen
 import com.example.cinema.documents.presentation.screen.moviedetail.MovieDetailScreen
+import com.example.cinema.documents.presentation.screen.onboarding.OnboardingScreen
 import com.example.cinema.documents.presentation.screen.search.SearchScreen
+import kotlinx.coroutines.launch
 
 @Composable
 fun MainScreen() {
@@ -28,7 +34,11 @@ fun MainScreen() {
         Screen.Search.route,
         Screen.Account.route
     )
+    val scope = rememberCoroutineScope()
+    val context = LocalContext.current
+    val preferences = remember { OnboardingPreferences(context) }
 
+    val onboardingPreferences = OnboardingPreferences(navController.context)
     Scaffold(
         bottomBar = {
             if (showBottomBar) {
@@ -49,10 +59,15 @@ fun MainScreen() {
     ) { padding ->
         NavHost(
             navController = navController,
-            startDestination = Screen.Home.route,
+            startDestination = Screen.OnBoardingScreen.route,
             modifier = Modifier.padding(padding)
         ) {
-            composable(Screen.Home.route) { HomeScreen(navController = navController) }
+            composable(Screen.Home.route) {
+                HomeScreen(
+                    navController = navController,
+                    onboardingPreferences = onboardingPreferences
+                )
+            }
             composable(Screen.Search.route) {
                 SearchScreen(
                     navController = navController,
@@ -72,6 +87,18 @@ fun MainScreen() {
                     },
                     navController = navController
                 )
+            }
+            composable(
+                route = Screen.OnBoardingScreen.route
+            ) {
+                OnboardingScreen {
+                    scope.launch {
+                        preferences.setOnboardingCompleted()
+                        navController.navigate(Screen.Home.route) {
+                            popUpTo(Screen.OnBoardingScreen.route) { inclusive = true }
+                        }
+                    }
+                }
             }
         }
     }
